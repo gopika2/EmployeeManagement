@@ -1,6 +1,6 @@
 ﻿namespace EmployeeManagement.API.Models
 {
-    public class EmployeeDetailedViewModel
+    public class EmployeeViewModel
     {
         public int Id { get; set; }
         public string Name { get; set; }

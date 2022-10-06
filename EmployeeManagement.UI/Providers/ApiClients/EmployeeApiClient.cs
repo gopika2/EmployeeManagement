@@ -17,7 +17,7 @@ namespace EmployeeManagement.UI.Providers.ApiClients
             _httpClient = httpClient;
         }
 
-        public IEnumerable<EmployeeViewModel> GetAllEmployee()
+        public IEnumerable<EmployeeViewModel>GetAllEmployee()
         {
             //Consume /employee endpoint in the EmployeeManagementApi using _httpClient
             using (var response = _httpClient.GetAsync("https://localhost:5001/api/employee/get-all").Result)
@@ -67,10 +67,30 @@ namespace EmployeeManagement.UI.Providers.ApiClients
                 
             }
         }
+        public bool UpdateEmployee(EmployeeViewModel employee)
+        {
+            var json = JsonConvert.SerializeObject(employee);
+            var data = new StringContent(json, Encoding.UTF8, "application/json");
+
+            using (var response = _httpClient.PutAsync("https://localhost:5001/api/employee/update-employee", data).Result)
+            {
+                if (response.StatusCode.ToString() == "OK")
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
 
 
+            }
+        }
 
-
+       /* public bool UpdateEmployee(EmployeeViewModel employee)
+        {
+            throw new System.NotImplementedException();
+        }*/
     }
 
 }

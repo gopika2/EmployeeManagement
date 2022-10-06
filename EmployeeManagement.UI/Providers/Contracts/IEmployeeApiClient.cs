@@ -10,5 +10,6 @@ namespace EmployeeManagement.UI.Providers.Contracts
         EmployeeDetailedViewModel GetEmployeeById(int employeeId);
         bool DeleteEmployeeById(int employeeId);
         bool InsertEmployee(EmployeeViewModel employee);
+        bool UpdateEmployee(EmployeeViewModel employee);
     }
 }

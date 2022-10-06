@@ -29,16 +29,22 @@ namespace EmployeeManagement.UI.Controllers
                 return View(employees);
             }
             catch (Exception)
-            {
+            { 
 
                 throw;
-            }
+            } 
         }
         [HttpPost]
         public bool InsertEmployee([FromBody]EmployeeViewModel employee)
         {
           var insertEmployee= _employeeApiClient.InsertEmployee(employee);
-            return insertEmployee;
+          return insertEmployee;
+        }
+        [HttpPut]
+        public bool UpdateEmployee([FromBody] EmployeeViewModel employee)
+        {
+            var updateEmployee = _employeeApiClient.UpdateEmployee(employee);
+            return updateEmployee;
         }
     }
 }

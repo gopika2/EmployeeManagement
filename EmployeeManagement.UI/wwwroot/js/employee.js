@@ -48,8 +48,9 @@ function bindEvents() {
             }
         });
     });
+    $("#createNewEmployee").submit(function () {
 
-    $("#btnSave").click(function(){
+       // $("#btnSave").click(function(){
         var employee =  {
             employeeId: 0,
             name: $("#txtName").val(),
@@ -60,7 +61,8 @@ function bindEvents() {
         console.log(employee);
         
         $.ajax({
-            url: 'https://localhost:44383/employee/InsertEmployee',
+             url: 'https://localhost:44383/employee/InsertEmployee',
+            
             type: 'POST',
             data: JSON.stringify(employee),
             contentType: "application/json; charset=utf-8",
@@ -81,7 +83,68 @@ function bindEvents() {
                 alert("Failed to add employee");
             }
         });
+
     });
+   // })
+
+      
+    $(".employeeEdit").on("click", function (event) {
+        console.log("clicked");
+        var employeeId = event.currentTarget.getAttribute("data-id");
+        $.ajax({
+            url: 'https://localhost:44383/api/internal/employee/' + employeeId,
+            type: 'GET',
+            contentType: "application/json; charset=utf-8",
+            success: function (result) {
+                Number($("#editid").val(result.id))
+                $("#editname").val(result.name)
+                Number($("#editdept").val(result.department))
+                Number($("#editage").val(result.age))
+                $("#editaddress").val(result.address)
+
+            },
+            error: function (error) {
+                console.log(error);
+            }                                                    
+        });
+    });
+    $("#update").on("click" ,function (event) {
+        console.log("clicked");
+
+            var Employee = {};
+            Employee.Id = Number($("#editid").val());
+            Employee.Name = $("#editname").val();
+            Employee.Department = $("#editdept").val();
+            Employee.Age = Number($("#editage").val());
+            Employee.Address = $("#editaddress").val();
+
+            var data = JSON.stringify(Employee);//convertion
+
+            $.ajax({
+                url: 'https://localhost:44383/employee/UpdateEmployee',
+                type: 'PUT',
+                dataType: 'json',
+                contentType: "application/json; charset=utf-8",
+                data: data,
+                success: function (result) {
+                    console.log(result);
+                    if (result == true) {
+                        alert("Employee updated successfully");
+                        location.reload();
+                    }
+                    else {
+                        alert("Failed to Updated");
+
+                    }
+                    location.reload();
+                },
+                error: function (error) {
+                    console.log(error);
+                }
+            });
+
+    });
+
 }
 
  

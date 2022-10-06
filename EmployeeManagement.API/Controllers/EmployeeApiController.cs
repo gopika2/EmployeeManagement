@@ -37,9 +37,9 @@ namespace EmployeeManagement.API.Controllers
             }
         }
 
-        private EmployeeDetailedViewModel MapToemployeeById(EmployeeDto employee)
+        private EmployeeViewModel MapToemployeeById(EmployeeDto employee)
         {
-            var employeeById = new EmployeeDetailedViewModel();
+            var employeeById = new EmployeeViewModel();
            {
                 employeeById.Id = employee.Id;
                 employeeById.Name = employee.Name;
@@ -72,7 +72,7 @@ namespace EmployeeManagement.API.Controllers
         [HttpPost]
         [Route("insert-employee")]
 
-        public IActionResult InsertEmployee([FromBody] EmployeeDetailedViewModel insertion)
+        public IActionResult InsertEmployee([FromBody] EmployeeViewModel insertion)
         {
             try
             {
@@ -94,7 +94,7 @@ namespace EmployeeManagement.API.Controllers
             }
         }
 
-        private EmployeeDto MapToInsertEmployeeDto(EmployeeDetailedViewModel employeeInsertion)
+        private EmployeeDto MapToInsertEmployeeDto(EmployeeViewModel employeeInsertion)
         {
             var employeeInsert = new EmployeeDto();
             {
@@ -108,7 +108,7 @@ namespace EmployeeManagement.API.Controllers
         }
         [HttpPut]
         [Route("update-employee")]
-        public IActionResult UpdateEmployee([FromBody] EmployeeDetailedViewModel updation)
+        public IActionResult UpdateEmployee([FromBody] EmployeeViewModel updation)
         {
             try
             {
@@ -129,7 +129,7 @@ namespace EmployeeManagement.API.Controllers
                 return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
             }
         }
-        private EmployeeDto MapToUpdateDto(EmployeeDetailedViewModel employeeUpdation)
+        private EmployeeDto MapToUpdateDto(EmployeeViewModel employeeUpdation)
         {
             var employeeUpdate = new EmployeeDto();
             {
